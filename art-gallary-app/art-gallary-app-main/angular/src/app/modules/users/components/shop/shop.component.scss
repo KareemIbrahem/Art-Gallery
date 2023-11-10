@@ -1,0 +1,30 @@
+.example-form {
+  min-width: 150px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.header{
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+
+
+
+// madia query
+@media (max-width: 900px) {
+  .example-form{
+    flex-direction: column;
+  }
+
+  .serach-container{
+    width: 100% !important;
+  }
+}

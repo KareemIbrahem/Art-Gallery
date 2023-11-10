@@ -1,0 +1,124 @@
+<section>
+  <h2 class="main-title">Welcome to your home</h2>
+  <h5 class="text-center mb-5">You can manage your data from here....</h5>
+  <div class="setting">
+    <mat-card class="card text-center p-4 shadow-effect">
+      <mat-card-subtitle class="title mb-3">Personal Data</mat-card-subtitle>
+      <div class="alert alert-danger" *ngIf="errMessage">{{ errMessage }}</div>
+      <form
+        class="example-form"
+        [formGroup]="personalForm"
+        (ngSubmit)="personalDataChange()"
+      >
+        <mat-form-field class="example-full-width mt-3 d-none">
+          <mat-label>Name</mat-label>
+          <input
+            formControlName="name"
+            type="text"
+            matInput
+            placeholder="Ex. motemed khaled"
+          />
+          <mat-error *ngIf="fcPersonal['name'].errors?.['required']">
+            Name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width mt-3">
+          <mat-label>Name</mat-label>
+          <input
+            formControlName="name"
+            type="text"
+            matInput
+            placeholder="Ex. motemed khaled"
+          />
+          <mat-error *ngIf="fcPersonal['name'].errors?.['required']">
+            Name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width mt-3">
+          <mat-label>Phone</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Ex. 01022484942"
+            formControlName="phone"
+          />
+          <mat-error *ngIf="fcPersonal['phone'].errors?.['required']">
+            Phone is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="fcPersonal['phone'].errors?.['pattern']">
+            Invalid phone number
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width mt-3">
+          <mat-label>Address</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Ex. cairo"
+            formControlName="address"
+          />
+          <mat-error *ngIf="fcPersonal['address'].errors?.['required']">
+            Address is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <button
+          class="mt-3"
+          [disabled]="personalForm.invalid"
+          mat-raised-button
+          color="primary"
+        >
+          Save
+        </button>
+      </form>
+    </mat-card>
+
+    <mat-card class="card text-center p-4 shadow-effect">
+      <mat-card-subtitle class="title mb-3">Change password</mat-card-subtitle>
+      <div class="alert alert-danger" *ngIf="errPassMessage">
+        {{ errPassMessage }}
+      </div>
+      <form
+        class="example-form"
+        [formGroup]="passwordForm"
+        (ngSubmit)="passwordChange()"
+      >
+        <mat-form-field class="example-full-width mt-3">
+          <mat-label>Old Password</mat-label>
+          <input type="password" matInput formControlName="oldpassword" />
+          <mat-error *ngIf="fcPassword['oldpassword'].errors?.['required']">
+            Old Password is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width mt-3">
+          <mat-label>New Password</mat-label>
+          <input type="password" matInput formControlName="newPassword" />
+          <mat-error *ngIf="fcPassword['newPassword'].errors?.['required']">
+            New Password is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width mt-3">
+          <mat-label>Confirm Password</mat-label>
+          <input type="password" matInput formControlName="confirmPassword" />
+          <mat-error *ngIf="fcPassword['confirmPassword'].errors?.['required']">
+            Confirm Password is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <button
+          class="mt-3"
+          [disabled]="passwordForm.invalid"
+          mat-raised-button
+          color="primary"
+        >
+          Save
+        </button>
+      </form>
+    </mat-card>
+  </div>
+</section>

@@ -1,0 +1,35 @@
+<div class="login d-flex justify-content-center align-items-center h-100  p-3">
+  <div class="card shadow-effect p-5">
+    <h6 class="text-center title mb-5">Please Verify Your Code !</h6>
+
+    <div class="alert alert-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
+    <div class="alert alert-success" *ngIf="resendMessage">{{ resendMessage }}</div>
+
+    <form class="example-form mb-4" [formGroup]="verifyForm" (ngSubmit)="onSubmit()">
+      <mat-form-field class="example-full-width">
+        <mat-label>Verify Code</mat-label>
+        <input type="text"  matInput placeholder="Ex. 123456" formControlName="resetCode">
+        <mat-error *ngIf="fc['resetCode'].errors?.['required']" >
+          verify code <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="fc['resetCode'].errors?.['minlength']" >
+          verify code must be 6 digit
+        </mat-error>
+        <mat-error *ngIf="fc['resetCode'].errors?.['maxlength']" >
+          verify code must be 6 digit
+        </mat-error>
+      </mat-form-field>
+      <div class="submit-button mt-3">
+        <div class="forget text-end">
+        </div>
+        <div class="d-block mt-4">
+          <button [disabled]="verifyForm.invalid" color="primary"  mat-raised-button color="primary" >Verify</button>
+        </div>
+      </div>
+    </form>
+    <div>
+      <h6 class="text-center title mb-3">We already sent a verification code to your mail...! </h6>
+      <button mat-raised-button (click)="resendVerifyCode()">Dont recieve code ...</button>
+    </div>
+  </div>
+</div>

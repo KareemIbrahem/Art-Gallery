@@ -1,0 +1,4 @@
+<app-header [sideNav]="sideNav"></app-header>
+<app-side-nav (sideNavEvent)="onEventEmit($event)">
+  <router-outlet></router-outlet>
+</app-side-nav>

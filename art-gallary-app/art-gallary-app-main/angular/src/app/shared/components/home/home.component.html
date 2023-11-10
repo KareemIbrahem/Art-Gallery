@@ -1,0 +1,22 @@
+<section>
+  <div class="landing">
+    <div class="text">
+      <h2>
+        Welcome,<br />
+        to <span>Art-Gallary</span>
+      </h2>
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure
+        laudantium vero exercitationem, labore dignissimos impedit.
+      </p>
+    </div>
+  </div>
+</section>
+<section>
+  <h2 class="main-title">Our Product</h2>
+  <app-product
+    [products]="products"
+    (loadMoreEvent)="onEventEmit($event)"
+    [ifLoad]="true"
+  ></app-product>
+</section>

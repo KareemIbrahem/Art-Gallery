@@ -1,0 +1,83 @@
+<section>
+  <h2 class="main-title">{{ mode }} product</h2>
+  <form class="example-form" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="form">
+      <div>
+        <mat-form-field class="example-full-width mb-3">
+          <mat-label> Product Name</mat-label>
+          <input type="text"  matInput placeholder="Ex. pat" formControlName="name">
+          <mat-error *ngIf="fc['name'].errors?.['required']">
+            Product name is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="fc['name'].errors?.['minlength']">
+            Product name must be greater than 4 charchter
+          </mat-error>
+          <mat-error *ngIf="fc['name'].errors?.['maxlength']">
+            Product name must be less than 30 charchter
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width mb-3">
+          <mat-label> Description</mat-label>
+          <input type="text"  matInput placeholder="Ex. pat" formControlName="description">
+          <mat-error *ngIf="fc['description'].errors?.['required']">
+            Product description is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="fc['description'].errors?.['minlength']">
+            Product description must be greater than 50 charchter
+          </mat-error>
+          <mat-error *ngIf="fc['description'].errors?.['maxlength']">
+            Product description must be less than 300 charchter
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width mb-3">
+          <mat-label> Price</mat-label>
+          <input type="number"  matInput placeholder="Ex. pat" formControlName="price">
+          <mat-error *ngIf="fc['price'].errors?.['required']">
+            Product price is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width mb-3">
+          <mat-label> Stock</mat-label>
+          <input type="number"  matInput placeholder="Ex. 10" formControlName="stock">
+          <mat-error *ngIf="fc['stock'].errors?.['required']">
+            Product stock is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+
+        <mat-form-field class="example-full-width mb-3">
+          <mat-label>Catogries</mat-label>
+          <mat-select   formControlName="category">
+            <mat-option *ngFor="let cat of catogry.data" [value]="cat._id">
+              {{cat.name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="fc['category'].errors?.['required']">
+            Product category is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+         <div *ngIf="imgSrc" class="image mb-4">
+          <img class=" w-100 "  src="assets/art.avif" alt="">
+         </div>
+
+        <mat-form-field class="example-full-width mb-3">
+          <mat-label>Product image</mat-label>
+          <ngx-mat-file-input class="input-file"  formControlName="image">
+             <mat-icon ngxMatFileInputIcon>folder</mat-icon>
+          </ngx-mat-file-input >
+          <mat-error *ngIf="fc['image'].errors?.['required']">
+            Product image is <strong>required</strong>
+          </mat-error>
+       </mat-form-field>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center align-items-center">
+      <button class="w-25" mat-raised-button color="primary">Save</button>
+    </div>
+  </form>
+</section>

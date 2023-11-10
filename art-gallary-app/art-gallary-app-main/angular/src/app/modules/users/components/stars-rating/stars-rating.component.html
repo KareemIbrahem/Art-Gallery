@@ -1,0 +1,11 @@
+<div class="rating">
+  <ng-container *ngFor="let star of getStarArray(); let i = index">
+    <mat-icon>
+      <ng-container *ngIf="i < rating && i + 1 > rating">
+        star_half
+      </ng-container>
+      <ng-container *ngIf="i < rating"> star </ng-container>
+      <ng-container *ngIf="i >= rating"> star_border </ng-container>
+    </mat-icon>
+  </ng-container>
+</div>

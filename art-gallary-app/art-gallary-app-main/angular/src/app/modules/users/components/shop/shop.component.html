@@ -1,0 +1,28 @@
+<section class="header p-5 shadow-effect">
+<div class="serach">
+  <form [formGroup]="filterForm" (ngSubmit)="onSubmit()" class="example-form d-flex justify-content-center gap-4 align-items-center">
+   <div class="w-50 serach-container">
+    <mat-form-field class="example-full-width">
+      <mat-label>Search by name</mat-label>
+      <input type="email"  matInput placeholder="Ex. product name" formControlName="search" >
+    </mat-form-field>
+   </div>
+   <div>
+    <mat-form-field>
+      <mat-label>Select Filter</mat-label>
+      <mat-select multiple formControlName="filter">
+        <mat-option value="sold">Sold</mat-option>
+        <mat-option value="ratingsAverage">Rating</mat-option>
+        <mat-option value="price">Price</mat-option>
+        <mat-option value="sold">best seller</mat-option>
+      </mat-select>
+    </mat-form-field>
+   </div>
+   <button class="mb-4" mat-raised-button color="primary">Apply</button>
+  </form>
+</div>
+</section>
+
+<section class="mt-5">
+  <app-product [products]="products" (loadMoreEvent)="onEventEmit($event)" [ifLoad]="true"></app-product>
+</section>

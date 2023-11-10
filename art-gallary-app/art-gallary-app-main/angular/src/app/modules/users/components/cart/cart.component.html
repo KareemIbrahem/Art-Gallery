@@ -1,0 +1,109 @@
+<section>
+  <div class="cart d-flex justify-content-around">
+    <div *ngIf="ifCart">No item in your cart..!</div>
+    <div class="product" *ngIf="!ifCart">
+      <div *ngIf="message" class="alert alert-danger">{{ message }}</div>
+      <div
+        class="image d-flex gap-4 shadow-effect mb-3 pe-3"
+        *ngFor="let cart of cartItems?.data?.cartItems"
+      >
+        <img class="img-fluid" [src]="cart.product.image" alt="" />
+        <div class="product-detail p-2 w-100">
+          <div class="d-flex justify-content-between title">
+            <h5 class="mt-2">{{ cart.product.name }}</h5>
+            <button
+              mat-icon-button
+              class="remove-icon"
+              (click)="deleteItem(cart.product._id)"
+            >
+              <mat-icon>delete_forever</mat-icon>
+            </button>
+          </div>
+          <div class="star mt-1 mb-1 d-flex align-items-center">
+            <mat-icon class="me-2">star</mat-icon>
+            <span>({{ cart.product.ratingsAverage }})</span>
+          </div>
+          <div class="quantity d-flex justify-content-between">
+            <div class="quant d-flex">
+              <button
+                mat-icon-button
+                class="qua-icon"
+                (click)="
+                  updateQuantity(
+                    cart.quantity - 1,
+                    cart.product._id,
+                    cart.product.stock
+                  )
+                "
+              >
+                <mat-icon>remove</mat-icon>
+              </button>
+              <span class="ms-3 me-3 mt-2">{{ cart.quantity }}</span>
+              <button
+                mat-icon-button
+                class="qua-icon"
+                (click)="
+                  updateQuantity(
+                    cart.quantity + 1,
+                    cart.product._id,
+                    cart.product.stock
+                  )
+                "
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+            <div class="total ms-3 mt-3">
+              <h5>{{ cart.quantity * cart.product.price | currency }}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-50 h-50 second shadow-effect p-3">
+      <div class="payment">
+        <h5 class="text-center">Payment Info</h5>
+        <mat-divider></mat-divider>
+        <div class="paymentMethod d-block mt-3 mb-3">
+          <h6 class="mb-3">Select method payment !</h6>
+          <mat-form-field>
+            <mat-label>Select an option</mat-label>
+            <mat-select [(value)]="selected">
+              <mat-option value="Cash">Cash</mat-option>
+              <mat-option value="Card">Card</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="taxs mt-3 mb-3">
+          <div class="tax d-flex justify-content-between align-items-center">
+            <h5>Tax</h5>
+            <h6>{{ 0 | currency }}</h6>
+          </div>
+          <div
+            class="shipping mt-4 d-flex justify-content-between align-items-center"
+          >
+            <h5>Shipping Price</h5>
+            <h6>{{ shippingPrice | currency }}</h6>
+          </div>
+          <div
+            class="totalPrice mt-4 d-flex justify-content-between align-items-center"
+          >
+            <h5>Total Price</h5>
+            <h6>{{ totalPrice | currency }}</h6>
+          </div>
+          <mat-divider class="mt-3"></mat-divider>
+        </div>
+        <button mat-raised-button color="primary" (click)="checkOut()">
+          CheckOut
+        </button>
+        <div class="alert alert-success mt-3" *ngIf="orderMessage">
+          {{ orderMessage }}
+        </div>
+        <div class="alert alert-danger mt-3" *ngIf="orderError">
+          {{ orderError }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,46 @@
+<mat-sidenav-container >
+  <mat-sidenav #sideNav="matSidenav">
+
+    <div *ngIf="isLoggedIn">
+      <img class="avatar mat-elevation-z8" [src]="userImg" alt="user-img">
+      <h5 class="name">{{ currentUser?.data?.name }}</h5>
+      <mat-divider></mat-divider>
+    </div>
+
+    <button mat-button class="menu-button mt-3">
+      <mat-icon>home</mat-icon>
+      <span routerLink="/">Home</span>
+    </button>
+
+    <button mat-button class="menu-button mt-3">
+      <mat-icon>shop</mat-icon>
+      <span routerLink="/users/shop">Shop</span>
+    </button>
+
+    <button mat-button class="menu-button mt-3" *ngIf="isLoggedIn && currentUser?.data?.role == 'user'">
+      <mat-icon>shopping_cart</mat-icon>
+      <span routerLink="/users/cart">Cart</span>
+    </button>
+
+    <button mat-button class="menu-button mt-3" *ngIf="isLoggedIn && currentUser?.data?.role == 'admin' || currentUser?.data?.role == 'superAdmin' ">
+      <mat-icon>dashboard</mat-icon>
+      <span routerLink="/admin/">Dashboard</span>
+    </button>
+
+    <button mat-button class="menu-button mt-3" *ngIf="isLoggedIn && currentUser?.data?.role == 'user'">
+      <mat-icon>favorite</mat-icon>
+      <span routerLink="/users/favorite">Favorite</span>
+    </button>
+
+    <mat-divider *ngIf="isLoggedIn"></mat-divider>
+
+    <button *ngIf="isLoggedIn" mat-button class="menu-button mt-3">
+      <mat-icon>account_circle</mat-icon>
+      <span routerLink="/users/setting">Setting</span>
+    </button>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z4 shadow-effect"><router-outlet></router-outlet></div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

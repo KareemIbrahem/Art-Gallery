@@ -1,0 +1,75 @@
+<section *ngIf="!updateMode">
+  <mat-card class="text-center p-5">
+    <mat-card-title class="mb-4">Add new category</mat-card-title>
+    <form [formGroup]="addCatogryForm"  (ngSubmit)="addCatogry()">
+      <mat-form-field class="example-full-width">
+        <mat-label>Category Name</mat-label>
+        <input type="text"  matInput placeholder="Ex. pat" formControlName="name">
+        <mat-error *ngIf="fc['name'].errors?.['required']">
+          Category name is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="fc['name'].errors?.['minlength']">
+          Category name must be more than 4 charchter
+        </mat-error>
+        <mat-error *ngIf="fc['name'].errors?.['maxlength']">
+          Category name must be les than 16 charchter
+        </mat-error>
+      </mat-form-field>
+      <div class="button mt-3">
+        <button mat-raised-button color="primary">Save</button>
+      </div>
+    </form>
+  </mat-card>
+</section>
+
+<div *ngIf="!updateMode" class="text-center d-flex align-items-center justify-content-center">
+  <table class="table table-dark mt-5 w-50">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cat of carogries.data ; let i = index;">
+        <th scope="row">{{ i +1 }}</th>
+        <td>{{ cat.name }}</td>
+        <td >
+          <div class="d-flex gap-1">
+            <button mat-raised-button color="primary" (click)="toggleMode(cat._id , cat.name)">Update</button>
+            <button mat-raised-button color="warn" (click)="deleteCatogry(cat._id)">Delete</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<section *ngIf="updateMode">
+  <mat-card class="text-center p-5">
+    <mat-card-title class="mb-4">Update category</mat-card-title>
+    <form [formGroup]="updateForm"  (ngSubmit)="updateCatogry()">
+      <mat-form-field class="example-full-width">
+        <mat-label>Category Name</mat-label>
+        <input type="text"  matInput placeholder="Ex. pat" formControlName="name">
+        <mat-error *ngIf="updateFc['name'].errors?.['required']">
+          Category name is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="updateFc['name'].errors?.['minlength']">
+          Category name must be more than 4 charchter
+        </mat-error>
+        <mat-error *ngIf="updateFc['name'].errors?.['maxlength']">
+          Category name must be les than 16 charchter
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width d-none">
+        <input type="text"  matInput placeholder="Ex. pat" formControlName="id">
+      </mat-form-field>
+      <div class="button mt-3 d-flex align-items-center justify-content-center gap-2">
+        <button mat-raised-button color="primary" >update</button>
+        <button mat-raised-button color="warn" (click)="cancel()">Cancel</button>
+      </div>
+    </form>
+  </mat-card>
+</section>

@@ -1,0 +1,165 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* You can add global styles to this file, and also import other style files */
+
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+$my-primary: mat.define-palette(mat.$indigo-palette, 500);
+$my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$my-warn: mat.define-palette(mat.$red-palette);
+
+$my-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $my-primary,
+      accent: $my-accent,
+      warn: $my-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+$my-theme-dark: mat.define-dark-theme(
+  (
+    color: (
+      primary: $my-primary,
+      accent: $my-accent,
+      warn: $my-warn,
+    ),
+  )
+);
+
+.theme-dark {
+  @include mat.all-component-colors($my-theme-dark);
+}
+
+.theme-light {
+  @include mat.all-component-colors($my-theme);
+}
+
+:root {
+  --main-transtion: 0.4s;
+  --main-color: #a55e1a;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.shadow-effect {
+  // border: none !important;
+  box-shadow: 0px 0px 33px -10px rgba(71, 114, 254, 0.3) !important;
+}
+
+.main-title {
+  margin: 0 auto 80px;
+  width: fit-content;
+  border: 2px solid black;
+  position: relative;
+  padding: 10px 20px;
+  font-size: 30px;
+  z-index: 1;
+  transition: var(--main-transtion);
+  -moz-transition: var(--main-transtion);
+  -ms-transition: var(--main-transtion);
+  -o-transition: var(--main-transtion);
+  -webkit-transition: var(--main-transtion);
+}
+.main-title:hover {
+  color: white;
+  border: 2px solid white;
+  transition-delay: var(--main-transtion);
+}
+.main-title::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -30px;
+  width: 15px;
+  height: 15px;
+  background-color: var(--main-color);
+  transform: translatey(-50%);
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  -webkit-transform: translatey(-50%);
+  -moz-transform: translatey(-50%);
+  -ms-transform: translatey(-50%);
+  -o-transform: translatey(-50%);
+}
+.main-title::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -30px;
+  width: 15px;
+  height: 15px;
+  background-color: var(--main-color);
+  transform: translatey(-50%);
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  -webkit-transform: translatey(-50%);
+  -moz-transform: translatey(-50%);
+  -ms-transform: translatey(-50%);
+  -o-transform: translatey(-50%);
+}
+.main-title:hover::before {
+  z-index: -1;
+  animation: left-anmy var(--main-transtion) linear forwards;
+  -webkit-animation: left-anmy var(--main-transtion) linear forwards;
+}
+.main-title:hover::after {
+  z-index: -1;
+  animation: right-anmy var(--main-transtion) linear forwards;
+  -webkit-animation: right-anmy var(--main-transtion) linear forwards;
+}
+
+//animation
+@keyframes left-anmy {
+  50% {
+    left: -50px;
+    width: 15px;
+    height: 15px;
+  }
+  100% {
+    left: 0;
+    width: 50%;
+    height: 100%;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+  }
+}
+@keyframes right-anmy {
+  50% {
+    right: -50px;
+    width: 15px;
+    height: 15px;
+  }
+  100% {
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+  }
+}

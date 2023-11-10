@@ -1,0 +1,84 @@
+<section>
+  <div class="product" *ngIf="products">
+    <mat-card class="shadow-effect" *ngFor="let product of products.data">
+      <img
+        [routerLink]="['/users/product', product._id]"
+        class="img-fluid artImg"
+        [src]="product.image"
+        alt="art-img"
+      />
+      <div
+        class="ps-3 pe-3 pt-3 d-flex justify-content-between align-items-center"
+      >
+        <mat-card-title class="product-title">{{
+          product.name
+        }}</mat-card-title>
+        <mat-icon matBadge="{{ product.view }}" matBadgeColor="primary"
+          >visibility</mat-icon
+        >
+        <mat-icon
+          *ngIf="this.currentUser?.data?.role == 'user'"
+          [ngClass]="{
+            favorite: !product.fav,
+            color: product.fav,
+            clicked: isClicked
+          }"
+          (click)="addToFavorite(product._id, product)"
+        >
+          {{ product.fav ? "favorite" : "favorite_border" }}
+        </mat-icon>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center p-3">
+        <app-stars-rating [rating]="product.ratingsAverage"></app-stars-rating>
+        <mat-card-subtitle>{{ product.price | currency }}</mat-card-subtitle>
+      </div>
+      <div
+        class="card-icon w-100 d-flex justify-content-center align-items-center pb-3 ps-3 pe-3"
+      >
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="addToCart(product._id)"
+          *ngIf="this.currentUser?.data?.role == 'user' && product.stock > 0"
+        >
+          add to cart
+          <mat-icon>local_grocery_store</mat-icon>
+        </button>
+        <div
+          *ngIf="
+            this.currentUser?.data?.role == 'admin' ||
+            this.currentUser?.data?.role == 'superAdmin'
+          "
+        >
+          <button
+            mat-raised-button
+            color="primary"
+            class="me-3"
+            routerLink="/admin/product"
+            [queryParams]="{ id: product._id }"
+          >
+            Update
+          </button>
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="deleteProduct(product._id)"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <div class="load-more d-flex justify-content-center align-items-center">
+    <button
+      *ngIf="ifLoad"
+      [disabled]="!products.paginateResult.next"
+      mat-raised-button
+      (click)="loadMore()"
+    >
+      Load More...
+    </button>
+  </div>
+</section>

@@ -1,0 +1,43 @@
+<div class="login d-flex justify-content-center align-items-center  p-3">
+  <div class="card shadow-effect p-5">
+    <div class="head mb-5 text-center">
+      <div class="text">
+        <h6 class="span mb-3">WELCOME BACK</h6>
+        <img *ngIf="!(fc['email'].errors?.['required'] || fc['email'].errors?.['email'] || fc['password'].errors?.['required']) ? true:false" class="imageForm mb-3" src="assets/done.jpg" alt="">
+        <img *ngIf="(fc['email'].errors?.['required'] || fc['email'].errors?.['email'] || fc['password'].errors?.['required']) ? true:false" class="imageForm mb-3" src="assets/flase.png" alt="">
+        <h4>Sign In to Your Account</h4>
+      </div>
+    </div>
+    <div class="alert alert-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
+    <form class="example-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input type="email"  matInput placeholder="Ex. pat@example.com" formControlName="email">
+        <mat-error *ngIf="fc['email'].errors?.['email']" >
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="fc['email'].errors?.['required']">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width mt-3">
+        <mat-label>Password</mat-label>
+        <input type="password" formControlName="password" matInput>
+        <mat-error *ngIf="fc['password'].errors?.['required']" >
+          password is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <div class="submit-button">
+        <div class="forget text-end">
+          <div><a routerLink="/auth/forgetPassword">Forget password</a></div>
+        </div>
+        <div class="d-block text-center mt-4">
+          <button  mat-raised-button color="primary" class="w-50">Login</button>
+          <div class="mt-2 signUp"><a routerLink="/auth/register">sign up for an account </a></div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

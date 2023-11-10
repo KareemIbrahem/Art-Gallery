@@ -1,0 +1,45 @@
+section {
+  .product {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 40px;
+    mat-card {
+      border-radius: 10px;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      -ms-border-radius: 10px;
+      -o-border-radius: 10px;
+      .artImg {
+        cursor: pointer;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+      }
+      .rating {
+        margin-right: 5px;
+        .active {
+          color: orange;
+        }
+      }
+    }
+  }
+  .load-more {
+    margin-top: 40px;
+  }
+}
+.product-title {
+  font-size: 20px;
+}
+.favorite {
+  cursor: pointer;
+  color: red;
+}
+
+.color {
+  color: red;
+  cursor: pointer;
+}
+
+.clicked {
+  color: red;
+  cursor: pointer;
+}
